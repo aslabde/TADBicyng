@@ -1,0 +1,27 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# FORMAT per a fer el test:                                         #
+# nomMetode, valorArgument1, valorArgument2, valorArgumentN         #
+# Admet String's, tipus de dades primitius i dates (java.util.Date) #
+# en format dd-MM-yyyy HH:mm:ss                                     #
+# No suporta metodes homonims amb el mateix nombre de parametres    #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#PRobando
+getNParkings, 5
+
+addBicycle, B51, M2, 5
+
+getNParkings, 5
+
+addBicycle, B52, M2, 5
+
+getNBicycles, 5
+
+
+# ERROR
+getNParkings, 5
+
+# TICKET 4
+addTicket, B51, Four ticket, 27-11-2013 03:30:00
+
+
+getNBicycles, 5
