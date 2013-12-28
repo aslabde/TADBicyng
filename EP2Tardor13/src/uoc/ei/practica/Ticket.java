@@ -120,6 +120,9 @@ public class Ticket extends IdentifiedObject implements Comparable<Ticket>{
 		return this.worker;
 	}
 
+	/**
+	 * @return la bicicleta a la que se asocia esta incidencia
+	 */
 	public Bicycle getBicycle() {
 		return bicycle;
 	}

@@ -109,7 +109,6 @@ public class Bicycle extends IdentifiedObject implements Comparable<Bicycle> {
 		else sb.append(Messages.LS);
 		
 		if (this.currentService!=null) sb.append(Messages.RUNNING).append(Messages.LS);
-		//else sb.append(Messages.PARKING).append(Messages.LS);
 		
 		return sb.toString();
 		
@@ -124,7 +123,7 @@ public class Bicycle extends IdentifiedObject implements Comparable<Bicycle> {
 	}
 	
 	/**
-	 * Metodo que marca la bicicleta como operativa
+	 * Metodo que marca la bicicleta como operativa y la cambia de lista
 	 */
 	public void changeStatusToOnService(){
 		this.status = BicycleStatus.ON_SERVICE;
@@ -133,7 +132,7 @@ public class Bicycle extends IdentifiedObject implements Comparable<Bicycle> {
 	}
 	
 	/**
-	 * Metodo que marca la bicicleta como averiada
+	 * Metodo que marca la bicicleta como averiada y la cambia de lista
 	 */
 	public void changeStatusToOnTrouble(){
 		this.status = BicycleStatus.ON_TROUBLE;
@@ -179,7 +178,7 @@ public class Bicycle extends IdentifiedObject implements Comparable<Bicycle> {
 	}
 
 	/**
-	 * @return
+	 * @return status
 	 */
 	public BicycleStatus getStatus() {
 		return status;

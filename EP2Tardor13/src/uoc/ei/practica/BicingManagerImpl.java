@@ -128,6 +128,8 @@ public class BicingManagerImpl implements BicingManager {
 		Station station = this.getStation(stationId, Messages.STATION_NOT_FOUND);
 		
 		bicycle = new Bicycle(bicycleId, model);
+		
+		//Include TAD position as attribute O(1)
 		bicycle.setParkingTadPosition( station.addBicycle(bicycle));
 		this.bicycles.afegir(bicycleId, bicycle);
 		
@@ -207,6 +209,7 @@ public class BicingManagerImpl implements BicingManager {
 		if(bicycle == null) throw new EIException(Messages.BICYCLE_NOT_FOUND);
 		
 		Station station = this.getStation(toStationId, Messages.STATION_NOT_FOUND);
+		//Park bicycle if possible, and return TAD position.
 		bicycle.setParkingTadPosition(station.addBicycle(bicycle)); 
 		
 		bicycle.finishService(station, dateTime);
@@ -272,10 +275,12 @@ public class BicingManagerImpl implements BicingManager {
 					
 		}
 		
+		//New ticket
 		Ticket ticket = new Ticket((this.globalNumTicket + 1), bicycle, description, dateTime);
 		this.tickets.afegir(ticket.identifier, ticket);
 		bicycle.getBicycleTicketsList().afegirAlPrincipi(ticket);
 		
+		//O(1) access to station.
 		Station station = bicycle.getCurrentStation();
 		if(station==null) throw new EIException(Messages.NOT_IN_PARKING);
 		
@@ -283,6 +288,7 @@ public class BicingManagerImpl implements BicingManager {
 		if (this.mostProblematicStation==null || this.mostProblematicStation.problems()<station.problems())
 				this.mostProblematicStation=station;
 		
+		//Update global ticket counter
 		this.globalNumTicket ++;
 		return this.globalNumTicket;	
 	}
@@ -334,6 +340,7 @@ public class BicingManagerImpl implements BicingManager {
 		
 		Iterador<Ticket> it = this.tickets();
 		
+		//Checks every ticket O(n) looking for gives worker
 		while (it.hiHaSeguent()){
 		    Ticket ticket = (Ticket)it.seguent();  
 			if(ticket.getWorker()!=null){	
@@ -375,7 +382,11 @@ public class BicingManagerImpl implements BicingManager {
 	@Override
 	public int getNBicycles(int stationId) throws EIException {
 		Station station = this.getStation(stationId, Messages.STATION_NOT_FOUND);
-		return station.availableBicycles().nombreElems();
+		int numBicycles = station.availableBicycles().nombreElems();
+		
+		if (numBicycles <= 0) throw new EIException(Messages.NO_BICYCLES);
+		
+		return numBicycles;
 	}
 
 
@@ -396,10 +407,11 @@ public class BicingManagerImpl implements BicingManager {
 		Iterador<Station> stationIt = this.stations();
 		Station auxstation =stationIt.seguent();
 		Station currentStation=null;
-	
+	   
+		//Iterate over stations
 		while(stationIt.hiHaSeguent()){ 
 			currentStation = stationIt.seguent();
-			
+			//Checks if there is a closer station with free bicycles
 			if(currentStation.calculateDistance(latitude, longitude) 
 					< auxstation.calculateDistance(latitude, longitude) 
 					&& this.getNBicycles(currentStation.getIdentifier()) > 0 ){
@@ -421,10 +433,10 @@ public class BicingManagerImpl implements BicingManager {
 		Iterador<Station> stationIt = this.stations();
 		Station auxstation =stationIt.seguent();
 		Station currentStation=null;
-	
+		//Iterate over stations
 		while(stationIt.hiHaSeguent()){ 
 			currentStation = stationIt.seguent();
-			
+			//Checks if there is a closer station with free parking
 			if(currentStation.calculateDistance(latitude, longitude) 
 					< auxstation.calculateDistance(latitude, longitude) 
 					&& this.getNParkings(currentStation.getIdentifier()) > 0 ){

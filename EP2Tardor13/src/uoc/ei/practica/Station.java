@@ -3,7 +3,6 @@ package uoc.ei.practica;
 import java.util.Comparator;
 
 import uoc.ei.tads.Contenidor;
-import uoc.ei.tads.CuaAmbPrioritat;
 import uoc.ei.tads.Iterador;
 import uoc.ei.tads.LlistaEncadenada;
 import uoc.ei.tads.Posicio;
@@ -118,7 +117,7 @@ public class Station {
 		Bicycle auxBicycle=null;
 		if (!this.availableBicycles.estaBuit()) {
 			
-			//get less used bike
+			//get less used bike from available list
 		    Iterador<Bicycle> bicycleIt = this.availableBicycles.elements();
 			auxBicycle = bicycleIt.seguent();
 			Bicycle currentBicycle=null;
@@ -216,6 +215,11 @@ public class Station {
 				
 	}
 	
+	/**
+	 * @param latitude
+	 * @param longitude
+	 * @return lineal distance between given point and station
+	 */
 	public long calculateDistance (long latitude, long longitude){
 		long totalDistance =(long) Math.sqrt(Math.pow(latitude - this.latitude, 2)
 				+Math.pow(longitude - this.longitude, 2));

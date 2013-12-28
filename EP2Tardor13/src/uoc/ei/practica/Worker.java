@@ -1,7 +1,5 @@
 package uoc.ei.practica;
 
-import java.util.Comparator;
-
 
 
 /**
@@ -79,6 +77,9 @@ public class Worker extends IdentifiedObject implements Comparable<Worker> {
 		return numTickets;
 	}
 
+	/**
+	 * Metodo que incrementa las incidencias asociadas a un operario
+	 */
 	public void incTickets(){
 		this.numTickets ++;
 	}
