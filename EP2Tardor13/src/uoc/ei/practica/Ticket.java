@@ -50,7 +50,7 @@ public class Ticket extends IdentifiedObject implements Comparable<Ticket>{
 	 * @return this.status
 	 */
 	public Status getStatus() {
-		return status;
+		return this.status;
 	}
 
 	/** 

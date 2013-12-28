@@ -31,6 +31,7 @@ public interface Messages {
 	public static final String TICKET_NOT_FOUND = "Ticket not found";
 	public static final String NOT_IN_PARKING = "This bycicle is not in a parking";
 	public static final String NOT_ASSINGNED = "Can't solve tickets not assigned";
+	public static final String NOT_PENDING = "ticket not pending for assignment";
 	public static final String NO_FREE_PARKINGS = "There are no free parkings";
 		
 	public static final String NO_WORKERS = "There are no workers";

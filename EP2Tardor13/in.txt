@@ -1,0 +1,33 @@
+
+# ADDED TEST CODE #
+
+# ERROR NOT FOUND
+addTicket, B900, error ticket, 27-11-2013 03:30:00
+
+getNBicycles, 2
+
+getClosestBike, 201, 501
+
+getBicycle, 1111, 2, 20-10-2013 10:00:00
+
+#ERROR no bicycles
+getNBicycles, 2
+
+getClosestBike, 201, 501
+
+# ERROR bicycle running
+addTicket, B11, error ticket, 27-11-2013 03:30:00
+
+#ERROR not assigned
+resolveTicket, 1, solved, 27-11-2013 06:30:00
+ 
+#ERROR already solved 
+assignTicket, 1, 27-11-2013 05:30:00
+ 
+getClosestParking, 1, 1
+
+getClosestParking, 1001, 1001
+
+getBicycle, 2222, 5, 20-10-2013 10:00:00
+
+getClosestParking, 1001, 1001

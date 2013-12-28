@@ -270,7 +270,8 @@ public class BicingManagerImpl implements BicingManager {
 		
 				
 		//Move bicycle from available to breakdown list
-		if(bicycle.getStatus()==BicycleStatus.ON_SERVICE){
+		if(bicycle.getStatus()==BicycleStatus.ON_SERVICE && 
+				bicycle.getCurrentStation()!=null){
 			bicycle.changeStatusToOnTrouble();
 					
 		}
@@ -310,6 +311,7 @@ public class BicingManagerImpl implements BicingManager {
 		if (ticket==null) throw new EIException(Messages.TICKET_NOT_FOUND);
 		
 		if (this.workers.estaBuit()) throw new EIException(Messages.NO_WORKERS);
+		if (ticket.getStatus()!=Status.NOT_ASSIGNED) throw new EIException(Messages.NOT_PENDING);
 		Worker worker = this.workers.desencuar();
 		
 		ticket.assingTicket(worker, dateTime);
@@ -411,10 +413,12 @@ public class BicingManagerImpl implements BicingManager {
 		//Iterate over stations
 		while(stationIt.hiHaSeguent()){ 
 			currentStation = stationIt.seguent();
+			
 			//Checks if there is a closer station with free bicycles
-			if(currentStation.calculateDistance(latitude, longitude) 
+			if( auxstation.getAvailableBicycles().nombreElems() <= 0 ||
+					(currentStation.calculateDistance(latitude, longitude) 
 					< auxstation.calculateDistance(latitude, longitude) 
-					&& this.getNBicycles(currentStation.getIdentifier()) > 0 ){
+					&& currentStation.getAvailableBicycles().nombreElems() > 0 )){
 				
 				auxstation=currentStation;
 			}
@@ -433,13 +437,16 @@ public class BicingManagerImpl implements BicingManager {
 		Iterador<Station> stationIt = this.stations();
 		Station auxstation =stationIt.seguent();
 		Station currentStation=null;
+		
 		//Iterate over stations
 		while(stationIt.hiHaSeguent()){ 
 			currentStation = stationIt.seguent();
+			
 			//Checks if there is a closer station with free parking
-			if(currentStation.calculateDistance(latitude, longitude) 
+			if( auxstation.getFreeParkings() <= 0 ||
+					(currentStation.calculateDistance(latitude, longitude) 
 					< auxstation.calculateDistance(latitude, longitude) 
-					&& this.getNParkings(currentStation.getIdentifier()) > 0 ){
+					&& currentStation.getFreeParkings() > 0 )){
 				
 				auxstation=currentStation;
 			}

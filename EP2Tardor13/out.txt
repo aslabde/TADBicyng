@@ -1,0 +1,73 @@
+# ADDED TEST CODE #
+
+# ERROR NOT FOUND
+addTicket(B900, error ticket, 27-11-2013 03:30:00)
+ERROR: Bicycle not found
+
+getNBicycles(2)
+1
+
+getClosestBike(201, 501)
+id: 2
+latitude: 200
+longitude: 500
+nParkings: 5
+bicycles: 1
+
+getBicycle(1111, 2, 20-10-2013 10:00:00)
+id: B11
+model: M1
+time of use: 4 hours (timeMilis: 14400000) 
+Running
+
+
+#ERROR no bicycles
+getNBicycles(2)
+ERROR: There are no bicycles
+
+getClosestBike(201, 501)
+id: 1
+latitude: 333
+longitude: 444
+nParkings: 10
+bicycles: 9
+
+
+# ERROR bicycle running
+addTicket(B11, error ticket, 27-11-2013 03:30:00)
+ERROR: This bycicle is not in a parking
+
+#ERROR not assigned
+resolveTicket(1, solved, 27-11-2013 06:30:00)
+ERROR: Can't solve tickets not assigned
+
+#ERROR already solved
+assignTicket(1, 27-11-2013 05:30:00)
+ERROR: ticket not pending for assignment
+
+getClosestParking(1, 1)
+id: 4
+latitude: 111
+longitude: 322
+nParkings: 8
+bicycles: 4
+
+getClosestParking(1001, 1001)
+id: 1
+latitude: 333
+longitude: 444
+nParkings: 10
+bicycles: 9
+
+getBicycle(2222, 5, 20-10-2013 10:00:00)
+id: B51
+model: M2
+time of use: 0 hours
+Running
+
+getClosestParking(1001, 1001)
+id: 5
+latitude: 700
+longitude: 700
+nParkings: 2
+bicycles: 0
