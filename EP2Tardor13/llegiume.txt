@@ -1,0 +1,42 @@
+********************
+*                  *
+* PRACTICA DED '13 *
+* Eduardo Balsa    *
+*				   *
+********************
+
+El desarrollo se ha hecho siguiendo los diseños de estructuras de datos
+propuestos en las soluciones oficiales de las PACs.
+
+La única variación existente, consiste en la modificación de los parkings,
+o listas de bicicletas aparcadas en cada estación. Para poder gestionar la
+nueva funcionalidad de las bicicletas averiadas, he optado por incluir dos
+listas encadenadas, una con las bicis funcionales, y otra con las averiadas,
+en lugar de una cola de prioridad. De esta manera, resulta más eficiente el
+poder mover una bicicleta de una lista a la otra, sin tener que desencolar 
+todos los elementos.
+
+Para poder gestionar las inserciones y eliminaciones de estas listas con un coste
+constante O(1), he incluido un atributo dentro de la clase bicicleta, que guardar
+la posición del objeto dentro del TAD lista. He considerado que era preferible el
+coste espacial de incluir un nuevo atributo, frente al coste temporal de tener que
+buscar el elemento en la lista.
+
+Por otro lado, y también buscando la mayor eficiencia, he incluido dentro de la 
+clase bicycle un atributo que hace referencia a la estación en la que está aparcada
+la bicicleta actualmente, o a nada en caso de que este siendo usada. Con la 
+inclusión de este atributo, conseguimos un acceso O(1) a la estación, para gestionar
+el cambio de lista de la bicicleta, en caso de tener que pasar a averiada, o a 
+operativa.
+
+Además este atributo sirve para confirmar que la bicicleta está aparcada, y puede
+abrirse una incidencia.
+
+Los ficheros in.txt y out.txt, son apéndices a los ficheros in2.txt y out2.txt 
+proporcionados con la práctica. En estos ficheros, se validan aquellas excepciones
+declaradas en la especificación, pero que no se comprobaban con los ficheros originales.
+
+
+
+
+ 
